@@ -1,4 +1,9 @@
 #!/bin/python3
+
+from sorting import _merged, merge_sorted, quick_sorted, cmp_standard, cmp_reverse
+from hypothesis import given
+import hypothesis.strategies as st
+import timeit
 '''
 Python provides built-in sort/sorted functions that use timsort internally.
 You cannot use these built-in functions anywhere in this file.
