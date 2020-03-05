@@ -1,8 +1,5 @@
 #!/bin/python3
 
-from hypothesis import given
-import hypothesis.strategies as st
-import timeit
 '''
 Python provides built-in sort/sorted functions that use timsort internally.
 You cannot use these built-in functions anywhere in this file.
