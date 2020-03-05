@@ -1,6 +1,5 @@
 #!/bin/python3
 
-from sorting import _merged, merge_sorted, quick_sorted, cmp_standard, cmp_reverse
 from hypothesis import given
 import hypothesis.strategies as st
 import timeit
