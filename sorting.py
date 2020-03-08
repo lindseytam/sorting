@@ -47,37 +47,26 @@ def _merged(xs, ys, cmp=cmp_standard):
     and returns a new list containing the elements of both xs and ys.
     Runs in linear time.
     '''
+
     sorted_list = []
+    end_xs = len(xs)
+    end_ys = len(ys)
+    i = 0 # iterator for xs
+    j = 0 # iterator for ys
 
-    if cmp == cmp_standard:
-        end_xs = len(xs)
-        end_ys = len(ys)
-        i = 0 # iterator for xs
-        j = 0 # iterator for ys
-
-    if cmp == cmp_reverse:
-        i = len(xs) - 1 # iterator for xs
-        j = len(ys) - 1 # iterator for ys
-        end_xs = -1  
-        end_ys = -1  
 
     while i != end_xs and j != end_ys:
-
+        print("i=", i, "j=", j)
         # if elem in xs is smaller than elem in ys
-        if xs[i] < ys[j]:
+        if (cmp == cmp_standard and xs[i] < ys[j]) or (cmp == cmp_reverse and xs[i] > ys[j]):
             sorted_list.append(xs[i])
-            if cmp == cmp_standard:
-                i += 1
-            else:
-                i-=1
+            i += 1
 
         # if elem in ys is smaller than elem in xs
-        else:
+        elif (cmp == cmp_standard and xs[i] >= ys[j]) or (cmp == cmp_reverse and xs[i] <= ys[j]):
             sorted_list.append(ys[j])
-            if cmp == cmp_standard:
-                j += 1
-            else:
-                j -= 1
+            j += 1
+
 
     print("after while loop, sorted list = ", sorted_list)
 
@@ -88,30 +77,17 @@ def _merged(xs, ys, cmp=cmp_standard):
     # nothing left in xs
     elif i == end_xs:
 
-        if cmp == cmp_standard:
-            for k in range(j, end_ys):
+        for k in range(j, end_ys):
                 sorted_list.append(ys[k])
-        else:
 
-            tmp = ys[:j+1]
-            while tmp:
-                elem = tmp.pop()
-                sorted_list.append(elem)
-                
         print("sorted_list=", sorted_list)
         return sorted_list
 
     # nothing left in ys
     elif j == end_ys:
-        if cmp == cmp_standard:
-            for k in range(i, end_xs):
-                sorted_list.append(xs[k])
-        else:
 
-            tmp = xs[:i+1]
-            while tmp:
-                elem = tmp.pop()
-                sorted_list.append(elem)
+        for k in range(i, end_xs):
+            sorted_list.append(xs[k])
 
         print("sorted_list=", sorted_list)
         return sorted_list
@@ -177,3 +153,9 @@ def quick_sort(xs, cmp=cmp_standard):
     You should directly modify the input xs variable instead of returning a copy of the list.
     '''
     return
+
+
+xs=[2, 1]
+ys=[3, 0]
+_merged(xs, ys, cmp=cmp_reverse)
+# merge_sorted(xs,cmp=cmp_standard)
