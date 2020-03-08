@@ -54,9 +54,8 @@ def _merged(xs, ys, cmp=cmp_standard):
     i = 0 # iterator for xs
     j = 0 # iterator for ys
 
-
     while i != end_xs and j != end_ys:
-        print("i=", i, "j=", j)
+
         # if elem in xs is smaller than elem in ys
         if (cmp == cmp_standard and xs[i] < ys[j]) or (cmp == cmp_reverse and xs[i] > ys[j]):
             sorted_list.append(xs[i])
@@ -67,11 +66,9 @@ def _merged(xs, ys, cmp=cmp_standard):
             sorted_list.append(ys[j])
             j += 1
 
-
-    print("after while loop, sorted list = ", sorted_list)
-
     # nothing left in xs or ys
     if i == end_xs and j == end_ys:
+        print(sorted_list)
         return sorted_list
 
     # nothing left in xs
@@ -79,8 +76,7 @@ def _merged(xs, ys, cmp=cmp_standard):
 
         for k in range(j, end_ys):
                 sorted_list.append(ys[k])
-
-        print("sorted_list=", sorted_list)
+        print(sorted_list)
         return sorted_list
 
     # nothing left in ys
@@ -88,8 +84,7 @@ def _merged(xs, ys, cmp=cmp_standard):
 
         for k in range(i, end_xs):
             sorted_list.append(xs[k])
-
-        print("sorted_list=", sorted_list)
+        print(sorted_list)
         return sorted_list
 
 
@@ -108,18 +103,19 @@ def merge_sorted(xs, cmp=cmp_standard):
     '''
 
     if len(xs) == 1 or len(xs) == 0:
-        print(xs)
         return xs
     else:
         middle = len(xs)//2
         left = xs[:middle]
-        merge_sorted(left)
         right = xs[middle:]
+
+        merge_sorted(left)
         merge_sorted(right)
-        print("left=", merge_sorted(left))
-        print("right=", merge_sorted(right))
-        print(_merged(left, right))
-        return _merged(left, right)
+        print("_merged(left, right)=", _merged(merge_sorted(left), merge_sorted(right)))
+        return _merged(merge_sorted(left), merge_sorted(right))
+        # print("left=", merge_sorted(left), "right=", merge_sorted(right), "_merged(left, right)=", _merged(left, right))
+        # print("xs=", xs)
+        # return xs
 
 def quick_sorted(xs, cmp=cmp_standard):
     '''
