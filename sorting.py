@@ -154,8 +154,3 @@ def quick_sort(xs, cmp=cmp_standard):
     '''
     return
 
-
-xs=[2, 1]
-ys=[3, 0]
-_merged(xs, ys, cmp=cmp_reverse)
-# merge_sorted(xs,cmp=cmp_standard)
