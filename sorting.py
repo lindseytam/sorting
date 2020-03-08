@@ -137,6 +137,7 @@ def quick_sorted(xs, cmp=cmp_standard):
     if len(xs) == 1:
         return xs
     else:
+        return
         
 def quick_sort(xs, cmp=cmp_standard):
     '''
