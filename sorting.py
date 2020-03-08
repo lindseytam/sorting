@@ -1,4 +1,4 @@
- #!/bin/python3
+#!/bin/python3
 
 
 '''
@@ -56,10 +56,10 @@ def _merged(xs, ys, cmp=cmp_standard):
         j = 0 # iterator for ys
 
     if cmp == cmp_reverse:
-        i = len(xs) - 1
-        j = len(ys) - 1
-        end_xs = -1  # iterator for xs
-        end_ys = -1  # iterator for ys
+        i = len(xs) - 1 # iterator for xs
+        j = len(ys) - 1 # iterator for ys
+        end_xs = -1  
+        end_ys = -1  
 
     while i != end_xs and j != end_ys:
 
@@ -80,7 +80,7 @@ def _merged(xs, ys, cmp=cmp_standard):
                 j -= 1
 
     print("after while loop, sorted list = ", sorted_list)
-    print("i=", i, "j=", j)
+
     # nothing left in xs or ys
     if i == end_xs and j == end_ys:
         return sorted_list
@@ -97,6 +97,7 @@ def _merged(xs, ys, cmp=cmp_standard):
             while tmp:
                 elem = tmp.pop()
                 sorted_list.append(elem)
+                
         print("sorted_list=", sorted_list)
         return sorted_list
 
@@ -110,7 +111,6 @@ def _merged(xs, ys, cmp=cmp_standard):
             tmp = xs[:i+1]
             while tmp:
                 elem = tmp.pop()
-                print("elem=", elem)
                 sorted_list.append(elem)
 
         print("sorted_list=", sorted_list)
@@ -177,9 +177,3 @@ def quick_sort(xs, cmp=cmp_standard):
     You should directly modify the input xs variable instead of returning a copy of the list.
     '''
     return
-
-
-xs=[1, 2, 3]
-ys=[4]
-_merged(xs, ys, cmp=cmp_standard)
-# merge_sorted(xs,cmp=cmp_standard)
