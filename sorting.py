@@ -1,5 +1,6 @@
 #!/bin/python3
 
+
 '''
 Python provides built-in sort/sorted functions that use timsort internally.
 You cannot use these built-in functions anywhere in this file.
@@ -82,9 +83,6 @@ def _merged(xs, ys, cmp=cmp_standard):
         return sorted_list
 
 
-
-
-
 def merge_sorted(xs, cmp=cmp_standard):
     '''
     Merge sort is the standard O(n log n) sorting algorithm.
@@ -99,6 +97,16 @@ def merge_sorted(xs, cmp=cmp_standard):
     You should return a sorted version of the input list xs
     '''
 
+    if len(xs) == 1 or len(xs) == 0:
+        return xs
+    else:
+        middle = len(xs)//2
+        left = xs[:middle]
+        merge_sorted(left)
+        right = xs[middle:]
+        merge_sorted(right)
+        print(_merged(left, right))
+        return _merged(left, right)
 
 def quick_sorted(xs, cmp=cmp_standard):
     '''
@@ -134,7 +142,7 @@ def quick_sort(xs, cmp=cmp_standard):
     return
 
 
-xs=[1]
+xs=[]
 ys=[1]
 
-_merged(xs,ys,cmp=cmp_standard)
+merge_sorted(xs,cmp=cmp_standard)
