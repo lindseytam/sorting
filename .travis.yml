@@ -7,4 +7,4 @@ install:
 script:
   - python3 -m pytest -v tests/test_main.py 
     # uncomment the following line for extra credit
-    #- python3 -m pytest -v tests/test_ec.py 
+  - python3 -m pytest -v tests/test_ec.py 
