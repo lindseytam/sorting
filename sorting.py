@@ -175,19 +175,29 @@ def quick_sort(xs, cmp=cmp_standard):
     You should directly modify the input xs variable instead of returning a copy of the list.
     '''
 
-    def helper(xs, lo, hi):
+    def _qs_standard(xs, lo, hi):
+
         if lo < hi:
             p = _partition(xs, lo, hi)
+            _qs_standard(xs, lo, p-1)
+            _qs_standard(xs, p+1, hi)
+            return xs
 
+    def _qs_reverse(xs, lo, hi):
+
+        if lo < hi:
+            p = _partition_rev(xs, lo, hi)
             print("p=",p, "hi=", hi, "low=", lo)
-            helper(xs, lo, p-1)
-            helper(xs, p+1, hi)
+            _qs_reverse(xs, lo, p-1)
+            _qs_reverse(xs, p+1, hi)
 
             return xs
 
-    lo = 0
-    hi = len(xs)-1
-    return helper(xs, lo, hi)
+    if cmp == cmp_standard:
+        return _qs_standard(xs, 0, len(xs)-1)
+
+    else:
+        return _qs_reverse(xs, 0, len(xs) - 1)
 
 
 def _partition(xs, low, high):
@@ -205,6 +215,21 @@ def _partition(xs, low, high):
     xs[i + 1], xs[high] = xs[high], xs[i + 1]
     return (i + 1)
 
+def _partition_rev(xs, low, high):
+    i = (low - 1)  # index of smaller element #i = -1
+    pivot = xs[high]  # pivot # 1 bc high = 1
+
+    for j in range(low, high):
+        # print("xs[j] <= pivot=", xs[j] <= pivot, "xs[j]=", xs[j], "j=", j)
+        if xs[j] > pivot:
+
+            # increment index of smaller element
+            i += 1
+            xs[i], xs[j] = xs[j], xs[i]
+
+    xs[i + 1], xs[high] = xs[high], xs[i + 1]
+    return (i + 1)
+
 xs=[1, 3, 2, 4, 0]
 ys=[3, 4]
-print(quick_sort(xs, cmp_standard))
+print(quick_sort(xs, cmp_reverse))
