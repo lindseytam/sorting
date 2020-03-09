@@ -68,7 +68,7 @@ def _merged(xs, ys, cmp=cmp_standard):
 
     # nothing left in xs or ys
     if i == end_xs and j == end_ys:
-        print(sorted_list)
+
         return sorted_list
 
     # nothing left in xs
@@ -76,7 +76,7 @@ def _merged(xs, ys, cmp=cmp_standard):
 
         for k in range(j, end_ys):
                 sorted_list.append(ys[k])
-        print(sorted_list)
+
         return sorted_list
 
     # nothing left in ys
@@ -84,7 +84,7 @@ def _merged(xs, ys, cmp=cmp_standard):
 
         for k in range(i, end_xs):
             sorted_list.append(xs[k])
-        print(sorted_list)
+
         return sorted_list
 
 
@@ -141,6 +141,7 @@ def quick_sorted(xs, cmp=cmp_standard):
 
     if len(xs) <= 1:
         return xs
+
     else:
         pivot_val = xs[0] # pivot is the first elem
         for elem in xs:
@@ -156,10 +157,8 @@ def quick_sorted(xs, cmp=cmp_standard):
         high = quick_sorted(tmp_high, cmp=cmp)
 
     if cmp == cmp_reverse:
-        print(high + pivot + low)
         return high + pivot + low
     if cmp == cmp_standard:
-        print(low + pivot + high)
         return low + pivot + high
 
 
@@ -175,12 +174,37 @@ def quick_sort(xs, cmp=cmp_standard):
     to implement quick_sort as an in-place algorithm.
     You should directly modify the input xs variable instead of returning a copy of the list.
     '''
-    return
+
+    def helper(xs, lo, hi):
+        if lo < hi:
+            p = _partition(xs, lo, hi)
+
+            print("p=",p, "hi=", hi, "low=", lo)
+            helper(xs, lo, p-1)
+            helper(xs, p+1, hi)
+
+            return xs
+
+    lo = 0
+    hi = len(xs)-1
+    return helper(xs, lo, hi)
 
 
-xs=[52,8,45,43,6,56,76,36,54,12,34,98,41,30]
+def _partition(xs, low, high):
+    i = (low - 1)  # index of smaller element #i = -1
+    pivot = xs[high]  # pivot # 1 bc high = 1
+
+    for j in range(low, high):
+        # print("xs[j] <= pivot=", xs[j] <= pivot, "xs[j]=", xs[j], "j=", j)
+        if xs[j] < pivot:
+
+            # increment index of smaller element
+            i += 1
+            xs[i], xs[j] = xs[j], xs[i]
+
+    xs[i + 1], xs[high] = xs[high], xs[i + 1]
+    return (i + 1)
+
+xs=[1, 3, 2, 4, 0]
 ys=[3, 4]
-# _merged(xs, ys, cmp=cmp_standard)
-quick_sorted(xs, cmp=cmp_reverse)
-
-
+print(quick_sort(xs, cmp_standard))
