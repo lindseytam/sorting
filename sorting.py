@@ -154,6 +154,11 @@ def quick_sorted(xs, cmp=cmp_standard):
 
         low = quick_sorted(tmp_low, cmp=cmp)
         high = quick_sorted(tmp_high, cmp=cmp)
+
+    if cmp == cmp_reverse:
+        print(high + pivot + low)
+        return high + pivot + low
+    if cmp == cmp_standard:
         print(low + pivot + high)
         return low + pivot + high
 
@@ -176,6 +181,6 @@ def quick_sort(xs, cmp=cmp_standard):
 xs=[52,8,45,43,6,56,76,36,54,12,34,98,41,30]
 ys=[3, 4]
 # _merged(xs, ys, cmp=cmp_standard)
-quick_sorted(xs, cmp=cmp_standard)
+quick_sorted(xs, cmp=cmp_reverse)
 
 
