@@ -101,8 +101,8 @@ def merge_sorted(xs, cmp=cmp_standard):
             merge the two sorted halves
     You should return a sorted version of the input list xs
     '''
-    print("cmp =", cmp)
-    if len(xs) == 1 or len(xs) == 0:
+
+    if len(xs) <= 1:
         return xs
 
     else:
@@ -113,7 +113,7 @@ def merge_sorted(xs, cmp=cmp_standard):
 
         merge_sorted(left, cmp=cmp)
         merge_sorted(right, cmp=cmp)
-        print(" _merged=",_merged(merge_sorted(left, cmp=cmp), merge_sorted(right, cmp=cmp), cmp=cmp))
+
         return _merged(merge_sorted(left, cmp=cmp), merge_sorted(right, cmp=cmp), cmp=cmp)
 
 def quick_sorted(xs, cmp=cmp_standard):
@@ -134,11 +134,31 @@ def quick_sorted(xs, cmp=cmp_standard):
             return the concatenation of (less than, p, and greater than)
     You should return a sorted version of the input list xs
     '''
-    if len(xs) == 1:
+
+    tmp_low = []
+    tmp_high = []
+    pivot = []
+
+    if len(xs) <= 1:
         return xs
     else:
-        return
-        
+        pivot_val = xs[0] # pivot is the first elem
+        for elem in xs:
+
+            if elem > pivot_val:
+                tmp_high.append(elem)
+            elif elem < pivot_val:
+                tmp_low.append(elem)
+            else:
+                pivot.append(elem)
+
+        low = quick_sorted(tmp_low, cmp=cmp)
+        high = quick_sorted(tmp_high, cmp=cmp)
+        print(low + pivot + high)
+        return low + pivot + high
+
+
+
 def quick_sort(xs, cmp=cmp_standard):
     '''
     EXTRA CREDIT:
@@ -153,7 +173,9 @@ def quick_sort(xs, cmp=cmp_standard):
     return
 
 
-xs=[1, 2, 0]
+xs=[52,8,45,43,6,56,76,36,54,12,34,98,41,30]
 ys=[3, 4]
 # _merged(xs, ys, cmp=cmp_standard)
-merge_sorted(xs, cmp=cmp_reverse)
+quick_sorted(xs, cmp=cmp_standard)
+
+
